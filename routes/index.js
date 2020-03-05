@@ -19,8 +19,8 @@ router.get("/getDbs", function(req, res) {
 router.get("/getCollections", function(req, res) {
   mu.collectionsDb("some-mongo")
     .then(col => {
-      console.log(col);
-      return res.json(col.Collections);
+      console.log("Colectins", col.length());
+      return res.json(col);
     })
     .catch(err => console.log(err));
 });

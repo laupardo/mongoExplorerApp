@@ -39,7 +39,7 @@ function MongoUtils() {
             .db(dbName)
             .listCollections()
             .toArray()
-            .finally(() => client.close()) // Returns a promise that will resolve to the list of the collections
+            .finally(() => client.close()); // Returns a promise that will resolve to the list of the collections
       )
       .then(cols => console.log("Collections", cols));
   };
@@ -53,7 +53,7 @@ function MongoUtils() {
             .db()
             .admin()
             .listDatabases()
-            .finally(() => client.close()) // Returns a promise that will resolve to the list of the collections
+            .finally(() => client.close()); // Returns a promise that will resolve to the list of the collections
       )
       .then(dbs => {
         console.log("in", dbs);
