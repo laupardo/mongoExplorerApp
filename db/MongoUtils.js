@@ -5,10 +5,9 @@ function MongoUtils() {
   const mu = {};
 
   let hostname = "localhost",
-    port = 27017,
-
-  const user = process.env.MONGO_USER,
-    pwd = process.env.MONGO_PWD;
+    port = 27017;
+  const user = "admin",
+    pwd = "secret";
 
   //Getters and Setters
   mu.dbName = _dbName =>
@@ -23,7 +22,7 @@ function MongoUtils() {
     if (user === undefined) {
       url = process.env.MONGODB_URI;
     } else {
-      url = `mongodb://${user}:${pwd}@${hostname}:${port}`;
+      url = `mongodb://${hostname}:${port}`;
     }
     console.log(url);
     const cliente = new MongoClient(url);
@@ -31,26 +30,37 @@ function MongoUtils() {
     return cliente.connect();
   };
 
-mu.collectionsDb= (dbName) =>{
-  mu.connect()
-      .then( client => client
+  mu.collectionsDb = dbName => {
+    return mu
+      .connect()
+      .then(
+        client =>
+          client
             .db(dbName)
             .listCollections()
             .toArray()
             .finally(() => client.close()) // Returns a promise that will resolve to the list of the collections
-      ).then(cols => console.log("Collections", cols))      
-    }
-}
+      )
+      .then(cols => console.log("Collections", cols));
+  };
 
-mu.dbs= () =>{
-    mu.connect()
-      .then( client => client
+  mu.dbs = () => {
+    return mu
+      .connect()
+      .then(
+        client =>
+          client
             .db()
             .admin()
-            .listDatabases() 
+            .listDatabases()
             .finally(() => client.close()) // Returns a promise that will resolve to the list of the collections
-      ).then(dbs => console.log("Dbs", dbs))      
-    }
+      )
+      .then(dbs => {
+        console.log("in", dbs);
+        return dbs;
+      });
+  };
+  return mu;
 }
 const mu = MongoUtils();
-module.exports = MongoUtils;
+module.exports = mu;

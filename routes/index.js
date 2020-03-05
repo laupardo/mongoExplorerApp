@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const MongoUtils = require("../db/MongoUtils.js");
-const mu = MongoUtils();
+const mu = require("../db/MongoUtils.js");
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
@@ -9,10 +8,19 @@ router.get("/", function(req, res, next) {
 });
 
 router.get("/getDbs", function(req, res) {
-  mu.connect()
-    .then(mu.dbs)
+  mu.dbs()
     .then(dbs => {
-      res.json(users);
+      console.log(dbs.databases);
+      return res.json(dbs.databases);
+    })
+    .catch(err => console.log(err));
+});
+
+router.get("/getCollections", function(req, res) {
+  mu.collectionsDb("some-mongo")
+    .then(col => {
+      console.log(col);
+      return res.json(col.Collections);
     })
     .catch(err => console.log(err));
 });
