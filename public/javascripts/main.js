@@ -18,9 +18,7 @@ const displayColllections = col => {
 
 function docsFunction() {
   const dbname = document.getElementById("dbs").value;
-  console.log(dbname);
   const collName = document.getElementById("collectionSelect").value;
-  console.log(collName);
   fetch(`/getDocs/${dbname}/${collName}`)
     .then(res => {
       return res.json();
@@ -37,9 +35,61 @@ const displayDocs = docs => {
     let i = 0;
     for (field in pdoc) {
       console.log(val[i]);
-      doc.innerHTML += `${field} : ${val[i]}`;
+      doc.innerHTML += `${field} : ${val[i]} `;
       i++;
     }
     document.getElementById("docsSmallDiv").appendChild(doc);
   });
 };
+
+function newDoc() {
+  const dbname = document.getElementById("dbs").value;
+  const collName = document.getElementById("collectionSelect").value;
+  fetch(`/getNewest/${dbname}/${collName}`)
+    .then(res => {
+      return res.json();
+    })
+    .then(fillForm);
+  document.getElementById("newDoc").removeAttribute("style");
+}
+
+const fillForm = doc => {
+  console.log("input", doc[0]);
+  document.getElementById("docFormInner").innerHTML = "";
+  for (field in doc[0]) {
+    if (field != "_id") {
+      const formGroup = document.createElement("div");
+      formGroup.setAttribute("class", "form-group");
+      const label = document.createElement("label");
+      label.innerHTML = field;
+      label.setAttribute("for", `input${field}`);
+      const input = document.createElement("input");
+      input.setAttribute("type", "text");
+      input.setAttribute("class", "form-control");
+      input.setAttribute("id", `input${field}`);
+      formGroup.appendChild(label);
+      formGroup.appendChild(input);
+      document.getElementById("docFormInner").appendChild(formGroup);
+    }
+  }
+};
+
+function insertNewDoc() {
+  const inputs = document.getElementsByTagName("input");
+  const doc = "{";
+  console.log(doc);
+  for (let i = 0; i < inputs.length; i++) {
+    const att = inputs[0].getAttribute("id").replace("input", "");
+    let str = `${att}:"${inputs[i].value}",`;
+    doc += str;
+  }
+  doc += "}";
+  console.log(doc);
+  fetch("/newDoc", {
+    method: "POST", // or 'PUT'
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(doc)
+  }).then(res => res.json());
+}

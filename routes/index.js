@@ -2,11 +2,6 @@ var express = require("express");
 var router = express.Router();
 const mu = require("../db/MongoUtils.js");
 
-/* GET home page. */
-//router.get("/hey", function(req, res, next) {
-//  res.render("index", { title: "Express" });
-//});
-
 router.get("/", function(req, res) {
   mu.dbs()
     .then(dbs => {
@@ -38,6 +33,14 @@ router.get("/getNewest/:db/:col/", function(req, res) {
     .then(docs => {
       return res.json(docs);
     })
+    .catch(err => console.log(err));
+});
+
+router.post("/newDoc", (req, res) => {
+  const doc = req.body.doc.json();
+  mu.users
+    .insertUser(doc)
+    .then(res.redirect("/"))
     .catch(err => console.log(err));
 });
 

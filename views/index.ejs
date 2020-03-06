@@ -41,9 +41,20 @@
             <h2 id="docsTitle">Documents</h2>
           </div>
           <div id="docsSmallDiv"></div>
+          <button type="button" onclick="newDoc()" class="btn btn-primary">
+            new Doc
+          </button>
         </div>
-        <div id="newDoc">
+        <div id="newDoc" style="visibility: hidden">
           <h2 id="docsTitle">Create new document</h2>
+          <form action="" id="docForm" method="POST" class="form-example">
+            <div id="docFormInner"></div>
+            <div>
+              <button type="button" onclick="insertNewDoc()" class="btn btn-primary">
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

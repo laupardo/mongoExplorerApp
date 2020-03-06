@@ -100,6 +100,15 @@ function MongoUtils() {
       });
   };
 
+  mu.insertNewRecord = (dbName, collectionName, doc) => {
+    return mu.connect().then(client => {
+      client
+        .db(dbName)
+        .collection(colName)
+        .insertOne(doc)
+        .finally(() => client.close());
+    });
+  };
   return mu;
 }
 const mu = MongoUtils();
