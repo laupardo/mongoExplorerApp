@@ -42,7 +42,6 @@ function MongoUtils() {
             .finally(() => client.close()) // Returns a promise that will resolve to the list of the collections
       )
       .then(cols => {
-        console.log("Collections", cols);
         return cols;
       });
   };
@@ -59,10 +58,48 @@ function MongoUtils() {
             .finally(() => client.close()) // Returns a promise that will resolve to the list of the collections
       )
       .then(dbs => {
-        console.log("in", dbs);
         return dbs;
       });
   };
+
+  mu.docsCollectionDb = (dbName, collectionName) => {
+    return mu
+      .connect()
+      .then(
+        client =>
+          client
+            .db(dbName)
+            .collection(collectionName)
+            .find()
+            .sort({ _id: -1 })
+            .limit(20)
+            .toArray()
+            .finally(() => client.close()) // Returns a promise that will resolve to the list of the collections
+      )
+      .then(docs => {
+        return docs;
+      });
+  };
+
+  mu.lastRecordCollectionDb = (dbName, collectionName) => {
+    return mu
+      .connect()
+      .then(
+        client =>
+          client
+            .db(dbName)
+            .collection(collectionName)
+            .find()
+            .sort({ _id: -1 })
+            .limit(1)
+            .toArray()
+            .finally(() => client.close()) // Returns a promise that will resolve to the list of the collections
+      )
+      .then(docs => {
+        return docs;
+      });
+  };
+
   return mu;
 }
 const mu = MongoUtils();

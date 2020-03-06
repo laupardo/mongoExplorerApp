@@ -16,11 +16,27 @@ router.get("/", function(req, res) {
     .catch(err => console.log(err));
 });
 
-router.get("/getCollections/:query", function(req, res) {
-  console.log("params", req.params.query);
-  mu.collectionsDb(req.params.query)
+router.get("/getCollections/:db", function(req, res) {
+  mu.collectionsDb(req.params.db)
     .then(col => {
       return res.json(col);
+    })
+    .catch(err => console.log(err));
+});
+
+router.get("/getDocs/:db/:col", function(req, res) {
+  console.log(req.params.db);
+  mu.docsCollectionDb(req.params.db, req.params.col)
+    .then(docs => {
+      return res.json(docs);
+    })
+    .catch(err => console.log(err));
+});
+
+router.get("/getNewest/:db/:col/", function(req, res) {
+  mu.lastRecordCollectionDb(req.params.db, req.params.col)
+    .then(docs => {
+      return res.json(docs);
     })
     .catch(err => console.log(err));
 });
