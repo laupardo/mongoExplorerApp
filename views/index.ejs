@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>Tit</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <%- include("./css.ejs") %>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div class="container">
+      <h1>This</h1>
+      <p>Welcome to this</p>
+      <%- include("./dbForm.ejs") %>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        onclick="collectionFunction()"
+      >
+        Button
+      </button>
+      <h2>Collections</h2>
+      <div id="colTitle">
+        <div>
+          <label for="pet-select"
+            >Choose a database in order to display it's collections:
+          </label>
+        </div>
+        <div>
+          <select name="collections" id="collectionSelect"> </select>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        onclick="objectFunction()"
+      >
+        Button
+      </button>
+    </div>
+    <%- include("./bootstrapJS.ejs") %> <%- include("./javaScripts.ejs") %>
   </body>
 </html>

@@ -1,0 +1,8 @@
+<div>
+  <label for="db-select">Choose a database in order to display it's collections:</label>
+    <select name="dbsel" id="dbs">
+      <% dbs.forEach((db)=>{%>
+      <option value=<%=db.name%>><%=db.name%></option>
+      <% }) %>
+    </select>
+</div>

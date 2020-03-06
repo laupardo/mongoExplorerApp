@@ -3,23 +3,23 @@ var router = express.Router();
 const mu = require("../db/MongoUtils.js");
 
 /* GET home page. */
-router.get("/", function(req, res, next) {
-  res.render("index", { title: "Express" });
-});
+//router.get("/hey", function(req, res, next) {
+//  res.render("index", { title: "Express" });
+//});
 
-router.get("/getDbs", function(req, res) {
+router.get("/", function(req, res) {
   mu.dbs()
     .then(dbs => {
-      console.log(dbs.databases);
-      return res.json(dbs.databases);
+      const databases = dbs.databases;
+      return res.render("index", { dbs: databases });
     })
     .catch(err => console.log(err));
 });
 
-router.get("/getCollections", function(req, res) {
-  mu.collectionsDb("some-mongo")
+router.get("/getCollections/:query", function(req, res) {
+  console.log("params", req.params.query);
+  mu.collectionsDb(req.params.query)
     .then(col => {
-      console.log("Colectins", col.length());
       return res.json(col);
     })
     .catch(err => console.log(err));
