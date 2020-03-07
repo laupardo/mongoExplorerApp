@@ -29,6 +29,7 @@ function docsFunction() {
 
 const displayDocs = docs => {
   document.getElementById("docsSmallDiv").innerHTML = "";
+
   docs.forEach(pdoc => {
     const doc = document.createElement("p");
     const val = Object.values(pdoc);
