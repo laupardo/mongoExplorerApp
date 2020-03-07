@@ -37,7 +37,8 @@ router.get("/getNewest/:db/:col/", function(req, res) {
 });
 
 router.post("/newDoc", (req, res) => {
-  const doc = req.body.doc.json();
+  console.log("boday", req.body.name);
+  //const doc = JSON.parse(req.body.doc);
   mu.users
     .insertUser(doc)
     .then(res.redirect("/"))

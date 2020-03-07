@@ -76,20 +76,18 @@ const fillForm = doc => {
 
 function insertNewDoc() {
   const inputs = document.getElementsByTagName("input");
-  const doc = "{";
-  console.log(doc);
+  const doc = {};
+  //let comma = ",";
   for (let i = 0; i < inputs.length; i++) {
     const att = inputs[0].getAttribute("id").replace("input", "");
-    let str = `${att}:"${inputs[i].value}",`;
-    doc += str;
+    doc[`${att}`] = `${inputs[i].value}`;
   }
-  doc += "}";
   console.log(doc);
   fetch("/newDoc", {
     method: "POST", // or 'PUT'
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(doc)
+    body: doc
   }).then(res => res.json());
 }
