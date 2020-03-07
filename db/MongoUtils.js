@@ -6,15 +6,8 @@ function MongoUtils() {
 
   let hostname = "localhost",
     port = 27017;
-  const user = "admin",
-    pwd = "secret";
-
-  //Getters and Setters
-  mu.dbName = _dbName =>
-    _dbName !== undefined ? ((dbName = _dbName), mu) : dbName;
-  mu.hostname = _hostName =>
-    _hostName !== undefined ? ((hostname = _hostName), mu) : hostname;
-  mu.port = _port => (_port !== undefined ? ((port = _port), mu) : port);
+  const user = process.env.MONGO_USER,
+    pwd = process.env.MONGO_PWD;
 
   mu.connect = () => {
     console.log("Trying to connect");
@@ -22,7 +15,7 @@ function MongoUtils() {
     if (user === undefined) {
       url = process.env.MONGODB_URI;
     } else {
-      url = `mongodb://${hostname}:${port}`;
+      url = `mongodb://${user}:${pwd}@${hostname}:${port}`;
     }
     console.log(url);
     const cliente = new MongoClient(url);
