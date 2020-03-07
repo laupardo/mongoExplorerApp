@@ -104,7 +104,7 @@ function MongoUtils() {
     return mu.connect().then(client => {
       client
         .db(dbName)
-        .collection(colName)
+        .collection(collectionName)
         .insertOne(doc)
         .finally(() => client.close());
     });

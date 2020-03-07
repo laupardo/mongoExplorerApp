@@ -37,11 +37,12 @@ router.get("/getNewest/:db/:col/", function(req, res) {
 });
 
 router.post("/newDoc", (req, res) => {
-  console.log("boday", req.body.name);
-  //const doc = JSON.parse(req.body.doc);
-  mu.users
-    .insertUser(doc)
-    .then(res.redirect("/"))
+  console.log("boday", req.body.db);
+  let db = req.body.db;
+  let col = req.body.col;
+  let doc = req.body.doc;
+  mu.insertNewRecord(db, col, doc)
+    .then(res => res.sendStatus(200))
     .catch(err => console.log(err));
 });
 

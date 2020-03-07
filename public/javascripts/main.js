@@ -76,8 +76,9 @@ const fillForm = doc => {
 
 function insertNewDoc() {
   const inputs = document.getElementsByTagName("input");
+  const dbname = document.getElementById("dbs").value;
+  const collName = document.getElementById("collectionSelect").value;
   const doc = {};
-  //let comma = ",";
   for (let i = 0; i < inputs.length; i++) {
     const att = inputs[0].getAttribute("id").replace("input", "");
     doc[`${att}`] = `${inputs[i].value}`;
@@ -88,6 +89,7 @@ function insertNewDoc() {
     headers: {
       "Content-Type": "application/json"
     },
-    body: doc
-  }).then(res => res.json());
+    body: JSON.stringify({ doc: doc, db: dbname, col: collName })
+  });
+  docsFunction();
 }
