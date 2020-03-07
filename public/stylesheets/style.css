@@ -15,8 +15,11 @@ a {
   background-color: #fdbfbf !important;
 }
 
-.card {
+#newDocCard {
   margin-top: 2em;
   width: 60%;
-  align-content: center;
+}
+#dogCard {
+  background-color: #fdbfbf;
+  margin-left: 18em;
 }

@@ -46,4 +46,7 @@ router.post("/newDoc", (req, res) => {
     .catch(err => console.log(err));
 });
 
+router.get("/surprise", function(req, res) {
+  return res.render("surprise");
+});
 module.exports = router;

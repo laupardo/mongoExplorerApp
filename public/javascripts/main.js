@@ -114,3 +114,7 @@ function insertNewDoc() {
   docsFunction();
   alert("Successfully added");
 }
+
+function redir() {
+  window.location.href = "./surprise";
+}

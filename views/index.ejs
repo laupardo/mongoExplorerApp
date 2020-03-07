@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tit</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Mongo Explorer</title>
     <%- include("./css.ejs") %>
   </head>
   <body>
@@ -13,9 +12,9 @@
           <hr class="my-4" />
           <p class="lead">Welcome to the mongo explorer</p>
           <p class="lead">
-            When you select something press the button that comes along with it
-            to see the changes
+            When you select something press the button that comes along with it to see the changes
           </p>
+          <button type="button" class="btn btn-light" onclick="redir()">Click here for an unexpected surprise</button>
         </div>
       </div>
       <div>
@@ -47,7 +46,7 @@
               class="btn btn-primary"
               onclick="docsFunction()"
             >
-              but
+              Click here to see the documents in this collection
             </button>
             <hr class="my-4" />
           </div>
@@ -64,12 +63,13 @@
               <tbody id="tBod"></tbody>
             </table>
           </div>
+          <h4 id="docsTitle">Want to create a new entry? Click below!</h4>
           <button type="button" onclick="newDoc()" class="btn btn-primary">
             Create new entry
           </button>
         </div>
-        <div id="newDoc" class="text-align: center"style="visibility: hidden">
-          <div class="card">
+        <div id="newDoc" class="text-align: center" style="visibility: hidden">
+          <div class="card" id="newDocCard">
             <h5 class="card-header">Click here to create a new entry</h5>
             <div class="card-body">
               <form action="" id="docForm" method="POST" class="form-example">

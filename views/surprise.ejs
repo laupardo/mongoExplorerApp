@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mongo Explorer</title>
+    <%- include("./css.ejs") %>
+  </head>
+  <body>
+    <div class="container" id="main" style="text-align: center">
+      <div id="buttonDiv">
+        <button type="button" class="btn btn-info" onclick="dogFunction()">
+          Show me my surprise!
+        </button>
+      </div>
+      <div id="carDiv" style="visibility: hidden">
+        <div class="card" id="dogCard" style="width: 50%">
+          <div id="imageDiv"></div>
+          <div id="classBod" class="card-body">
+            <small>Taken from dog api</small>
+          </div>
+        </div>
+      </div>
+      <div id="baclButtonDiv">
+        <button type="button" class="btn btn-info" onclick="back()">
+          Click to go back to the db explorer
+        </button>
+      </div>
+    </div>
+    <%- include("./bootstrapJS.ejs") %> <%- include("./surpriseScript.ejs") %>
+  </body>
+</html>
