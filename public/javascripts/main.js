@@ -92,4 +92,5 @@ function insertNewDoc() {
     body: JSON.stringify({ doc: doc, db: dbname, col: collName })
   });
   docsFunction();
+  alert("Successfully added");
 }
