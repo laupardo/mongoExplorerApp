@@ -28,18 +28,37 @@ function docsFunction() {
 }
 
 const displayDocs = docs => {
-  document.getElementById("docsSmallDiv").innerHTML = "";
-
+  document.getElementById("trHead").innerHTML = "";
+  document.getElementById("tBod").innerHTML = "";
+  const trHead = document.getElementById("trHead");
+  const tbody = document.getElementById("tBod");
+  const th = document.createElement("th");
+  th.setAttribute("scope", "col");
+  trHead.appendChild(th);
+  th.innerHTML = "row";
+  for (field in docs[0]) {
+    const th = document.createElement("th");
+    th.setAttribute("scope", "col");
+    th.innerHTML = field;
+    trHead.appendChild(th);
+  }
+  let j = 1;
   docs.forEach(pdoc => {
-    const doc = document.createElement("p");
+    const tr = document.createElement("tr");
+    const bodTh = document.createElement("th");
+    bodTh.setAttribute("scope", "col");
+    bodTh.innerHTML = j;
+    tr.appendChild(bodTh);
     const val = Object.values(pdoc);
     let i = 0;
     for (field in pdoc) {
-      console.log(val[i]);
-      doc.innerHTML += `${field} : ${val[i]} `;
+      const td = document.createElement("td");
+      td.innerHTML = val[i];
+      tr.appendChild(td);
       i++;
     }
-    document.getElementById("docsSmallDiv").appendChild(doc);
+    tbody.appendChild(tr);
+    j++;
   });
 };
 
@@ -81,7 +100,7 @@ function insertNewDoc() {
   const collName = document.getElementById("collectionSelect").value;
   const doc = {};
   for (let i = 0; i < inputs.length; i++) {
-    const att = inputs[0].getAttribute("id").replace("input", "");
+    const att = inputs[i].getAttribute("id").replace("input", "");
     doc[`${att}`] = `${inputs[i].value}`;
   }
   console.log(doc);

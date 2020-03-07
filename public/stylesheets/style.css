@@ -14,3 +14,9 @@ a {
 .jumbotron {
   background-color: #fdbfbf !important;
 }
+
+.card {
+  margin-top: 2em;
+  width: 60%;
+  align-content: center;
+}
