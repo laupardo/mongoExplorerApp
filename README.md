@@ -1,6 +1,8 @@
 # mongoExplorerApp
 ## Description
 App that lists dbs and lets you pick a dbs and visualize it's collections. You can also add documents to those collections. The app has a little quirk, can you find it?
+
+This corresponds to the first option of the assignment 8 AM Saturday March, 7 deadline. Basic requirements+deployment and create documents in collections. 
 ## Author
 
 - [Laura Pardo](https://laupardo.github.io/index.html)   :girl:
@@ -38,7 +40,7 @@ npm install nodemon -g
 ```
 npm install
 ```
-If any error arises aka module not found npm install <module name>
+If any error arises, aka module not found, use npm install <module name>. If all else fails, google it.
   
 ```
 nodemon start
