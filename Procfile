@@ -1,1 +1,1 @@
-web: nodemon start
+web: yarn start
